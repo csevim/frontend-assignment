@@ -1,0 +1,24 @@
+@use 'sass:map';
+@use '@fontsource-variable/inter/scss/mixins' as inter;
+
+// Inter stands in for SF Pro Display outside Apple platforms. Scaled to 96.5%
+// it matches SF Pro Display's cap height and text widths, so the same font
+// sizes render at the design's proportions with either font. The opsz axis
+// gives it display/text optical sizes like SF Pro.
+@include inter.generator(
+    $directory: '@fontsource-variable/inter/files',
+    $subsets: latin latin-ext,
+    $axes: opsz
+  )
+  using ($props) {
+  @font-face {
+    font-family: 'Inter Variable';
+    font-weight: map.get($props, font-weight);
+    font-style: map.get($props, font-style);
+    font-display: map.get($props, font-display);
+    src: map.get($props, src);
+    unicode-range: map.get($props, unicode-range);
+
+    size-adjust: 96.5%;
+  }
+}
